@@ -56,11 +56,10 @@ public class Script : ScriptBase
             Context.Request.Headers.TryAddWithoutValidation("Authorization", sessionId);
             string contentString = await (Context.Request.Content?.ReadAsStringAsync() ?? Task.FromResult<string>(null!)).ConfigureAwait(false);
             var contentJson = JsonConvert.DeserializeObject<JObject>(contentString);
-            string query = contentJson?["query"]?.ToString() ?? string.Empty;
+            string query = contentJson?["q"]?.ToString() ?? string.Empty;
             Context.Logger.LogInformation($"query: {query}");
             var body = new List<KeyValuePair<string, string>>{new("q", query)};
             Context.Request.Content = new FormUrlEncodedContent(body);
-            Context.Logger.LogInformation($"body: {JsonConvert.SerializeObject(Context.Request)}");
 
             HttpResponseMessage response = await Context.SendAsync(Context.Request, CancellationToken);
             response.EnsureSuccessStatusCode();
@@ -69,12 +68,12 @@ public class Script : ScriptBase
 
             var data = responseJson["data"];
             var next = responseJson["responseDetails"]?["next_page"]?.ToString() ?? "";
-            //Context.Logger.LogInformation($"next: {next}");
             while (next != "")
             {
                 Context.Logger.LogInformation($"next: {next}");
                 var requestUri = new Uri($"https://{Context.Request.RequestUri?.Host}{next}");
                 var request = new HttpRequestMessage(Context.Request.Method, requestUri);
+                request.Headers.TryAddWithoutValidation("Authorization", sessionId);
                 response = await Context.SendAsync(request, CancellationToken);
                 response.EnsureSuccessStatusCode();
                 responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
