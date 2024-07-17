@@ -1,0 +1,461 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: VantageCustom
+  description: ABBYY Vantage connector for Power Automate
+host: vantage-us.abbyy.com
+basePath: /
+schemes:
+  - https
+consumes: []
+produces:
+  - application/json
+paths:
+  /api/v1/skills:
+    get:
+      summary: Lists all available skills
+      description: Lists all available skills
+      operationId: ListsAllAvailableSkills
+      parameters: []
+      responses:
+        '200':
+          description: default
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: id
+                name:
+                  type: string
+                  description: name
+                type:
+                  type: string
+                  description: type
+  /api/v1/transactions:
+    post:
+      summary: Creates a processing transaction
+      description: Creates a processing transaction
+      operationId: CreatesAProcessingTransaction
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          default: application/json-patch+json
+          description: Content-Type
+        - name: body
+          in: body
+          schema:
+            type: object
+            properties:
+              skillId:
+                type: string
+                description: skillId
+                title: skillId
+            default:
+              skillId: 8297280c-97a0-446a-b781-d9f1ad1cd90e
+          required: true
+      responses:
+        '201':
+          description: '201'
+          schema:
+            type: object
+            properties:
+              transactionId:
+                type: string
+                description: transactionId
+        '400':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+  /api/v1/transactions/{transactionId}:
+    get:
+      summary: Gets transaction info
+      description: Gets transaction info
+      operationId: GetsTransactionInfo
+      parameters:
+        - name: transactionId
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: '200'
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: id
+              status:
+                type: string
+                description: status
+              manualReviewLink:
+                type: string
+                description: manualReviewLink
+              documents:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    resultFiles:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          fileId:
+                            type: string
+                            description: fileId
+                          fileName:
+                            type: string
+                            description: fileName
+                          type:
+                            type: string
+                            description: type
+                      description: resultFiles
+                    classification:
+                      type: object
+                      properties:
+                        isResultClassConfident:
+                          type: boolean
+                          description: isResultClassConfident
+                        resultClass:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              description: id
+                            name:
+                              type: string
+                              description: name
+                          description: resultClass
+                        classConfidences:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              classId:
+                                type: string
+                                description: classId
+                              className:
+                                type: string
+                                description: className
+                              confidence:
+                                type: integer
+                                format: int32
+                                description: confidence
+                          description: classConfidences
+                      description: classification
+                    businessRulesErrors:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          errorType:
+                            type: string
+                            description: errorType
+                          customMessage:
+                            type: string
+                            description: customMessage
+                          ruleId:
+                            type: string
+                            description: ruleId
+                      description: businessRulesErrors
+                description: documents
+              error:
+                type: string
+                description: error
+              sourceFiles:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: id
+                    name:
+                      type: string
+                      description: name
+                description: sourceFiles
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+    delete:
+      summary: Deletes the transaction
+      description: Deletes the transaction
+      operationId: DeletesTheTransaction
+      parameters:
+        - name: transactionId
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: '200'
+          schema: {}
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+  /api/v1/transactions/{transactionId}/files:
+    post:
+      consumes:
+        - multipart/form-data
+      summary: Adds files to the transaction
+      description: Adds files to the transaction
+      operationId: AddsFilesToTheTransaction
+      parameters:
+        - name: transactionId
+          in: path
+          type: string
+          required: true
+        - name: Files
+          in: formData
+          required: true
+          type: file
+          format: binary
+          description: The content of the file
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          default: multipart/form-data
+          description: Content-Type
+      responses:
+        '200':
+          description: '200'
+          schema: {}
+        '400':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+  /api/v1/transactions/{transactionId}/start:
+    post:
+      summary: Starts the transaction
+      description: Starts the transaction
+      operationId: StartsTheTransaction
+      parameters:
+        - name: transactionId
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: '200'
+          schema: {}
+        '400':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+  /api/v1/transactions/{transactionId}/files/{fileId}/download:
+    get:
+      summary: Downloads the result files
+      description: Downloads the result files
+      operationId: DownloadsTheResultFiles
+      parameters:
+        - name: transactionId
+          in: path
+          type: string
+          required: true
+        - name: fileId
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: '200'
+          schema:
+            type: object
+            properties: {}
+        '404':
+          description: default
+          schema:
+            type: object
+            properties:
+              type:
+                type: string
+                description: type
+              title:
+                type: string
+                description: title
+              status:
+                type: integer
+                format: int32
+                description: status
+              detail:
+                type: string
+                description: detail
+              instance:
+                type: string
+                description: instance
+  /api/v1/useskill: {}
+definitions: {}
+parameters: {}
+responses: {}
+securityDefinitions:
+  oauth2-auth:
+    type: oauth2
+    flow: accessCode
+    authorizationUrl: https://vantage-us.abbyy.com/auth2/connect/authorize
+    tokenUrl: https://vantage-us.abbyy.com/auth2/connect/token
+    scopes:
+      openid permissions global.wildcard offline_access: openid permissions global.wildcard offline_access
+security:
+  - oauth2-auth:
+      - openid permissions global.wildcard offline_access
+tags: []
