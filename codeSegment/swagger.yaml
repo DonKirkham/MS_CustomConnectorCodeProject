@@ -1,0 +1,110 @@
+swagger: '2.0'
+info:
+  title: Veeva Vault
+  description: Connector to Veeva Vault for queries and files.
+  version: '1.0'
+host: '@environmentVariables("new_veevavaultdomain")'
+basePath: /api/v24.1
+schemes:
+  - https
+consumes: []
+produces: []
+paths:
+  /query:
+    post:
+      operationId: vvQuery
+      summary: Veeva Vault Query
+      description: Query Veeva Vault using VQL
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              q:
+                type: string
+                description: Enter a VQL Query
+                title: VQL Query
+            required:
+              - q
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          default: '*/*'
+          x-ms-visibility: internal
+      responses:
+        default:
+          description: default
+          schema: {}
+  /services/file_staging/items/{item}:
+    get:
+      operationId: vvListItemsAtPath
+      summary: List Items at a Path
+      description: Return a list of files and folders for the specified path.
+      parameters:
+        - name: item
+          in: path
+          type: string
+          required: true
+          description: Specifiy the path to list files
+          x-ms-summary: List Files Path
+          format: ''
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          default: '*/*'
+          x-ms-visibility: internal
+      responses:
+        default:
+          description: default
+          schema: {}
+  /services/file_staging/items/content/{item}:
+    get:
+      operationId: vvDownloadItemContent
+      summary: Download Item Content
+      description: Retrieve the content of a specified file from the file staging server.
+      parameters:
+        - name: item
+          in: path
+          type: string
+          required: true
+          x-ms-visibility: important
+        - name: recursive
+          in: query
+          type: string
+          required: false
+          x-ms-visibility: advanced
+        - name: limit
+          in: query
+          type: string
+          required: false
+          x-ms-visibility: advanced
+        - name: format_result
+          in: query
+          type: string
+          required: false
+          x-ms-visibility: advanced
+        - name: Range
+          in: header
+          required: false
+          type: string
+          x-ms-visibility: internal
+        - name: Accept
+          in: header
+          required: true
+          type: string
+          default: application/json
+          x-ms-visibility: internal
+      responses:
+        default:
+          description: default
+          schema: {}
+definitions: {}
+parameters: {}
+responses: {}
+securityDefinitions: {}
+tags: []
+security: []
