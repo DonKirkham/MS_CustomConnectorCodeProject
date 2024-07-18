@@ -9,7 +9,7 @@ string CustomConnectorUrl = "https://conferenceapi.azurewebsites.net/sessions";/
 string OperationId = "GetSessions";//"[REPLACE WITH YOUR OPERATION ID]";
 
 //Ocp-Apim-Subscription-Key(Optional) - the subscription key for the custom connector if using a service like API-M.
-string OcpApimSubscriptionKey = "[REPLACE WITH YOUR OCP APIM SUBSCRIPTION KEY]";
+//string OcpApimSubscriptionKey = "[REPLACE WITH YOUR OCP APIM SUBSCRIPTION KEY]";
 
 
 try

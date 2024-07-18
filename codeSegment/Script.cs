@@ -78,6 +78,7 @@ public class Script : ScriptBase
         {
             // Log the request headers for debugging purposes
             Context.Logger.LogInformation($"Headers: {JsonConvert.SerializeObject(Context.Request.Headers)}");
+            
             // Extract the host domain from the request URI
             var hostDomain = Context.Request.RequestUri.Host;
             // Log the host domain
