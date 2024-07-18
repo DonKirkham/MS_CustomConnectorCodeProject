@@ -105,6 +105,11 @@ paths:
 definitions: {}
 parameters: {}
 responses: {}
-securityDefinitions: {}
 tags: []
-security: []
+securityDefinitions:
+  CustomApiKeyAuth:
+    type: apiKey
+    in: header  # or 'query' to send the API key in the query string
+    name: X-Custom-API-Key  # The name of the header or query parameter to be used
+security:
+  - CustomApiKeyAuth: []
