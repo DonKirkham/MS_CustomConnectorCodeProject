@@ -4,7 +4,7 @@ info:
   description: Connector to Veeva Vault for queries and files.
   version: '1.0'
 host: '@environmentVariables("new_veevavaultdomain")'
-basePath: /api/v24.1
+basePath: /api
 schemes:
   - https
 consumes: []
@@ -12,7 +12,7 @@ produces: []
 paths:
   /query:
     post:
-      operationId: vvQuery
+      operationId: VqlQuery
       summary: Veeva Vault Query
       description: Query Veeva Vault using VQL
       parameters:
@@ -40,7 +40,7 @@ paths:
           schema: {}
   /services/file_staging/items/{item}:
     get:
-      operationId: vvListItemsAtPath
+      operationId: ListItemsAtPath
       summary: List Items at a Path
       description: Return a list of files and folders for the specified path.
       parameters:
@@ -63,7 +63,7 @@ paths:
           schema: {}
   /services/file_staging/items/content/{item}:
     get:
-      operationId: vvDownloadItemContent
+      operationId: DownloadItemContent
       summary: Download Item Content
       description: Retrieve the content of a specified file from the file staging server.
       parameters:
@@ -76,17 +76,17 @@ paths:
           in: query
           type: string
           required: false
-          x-ms-visibility: advanced
+          x-ms-visibility: internal
         - name: limit
           in: query
           type: string
           required: false
-          x-ms-visibility: advanced
+          x-ms-visibility: internal
         - name: format_result
           in: query
           type: string
           required: false
-          x-ms-visibility: advanced
+          x-ms-visibility: internal
         - name: Range
           in: header
           required: false
@@ -106,10 +106,5 @@ definitions: {}
 parameters: {}
 responses: {}
 tags: []
-securityDefinitions:
-  CustomApiKeyAuth:
-    type: apiKey
-    in: header  # or 'query' to send the API key in the query string
-    name: X-Custom-API-Key  # The name of the header or query parameter to be used
-security:
-  - CustomApiKeyAuth: []
+securityDefinitions: {}
+security: []

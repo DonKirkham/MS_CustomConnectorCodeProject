@@ -9,12 +9,12 @@ public class Script : ScriptBase
     {
         // Log the start of the action with the current UTC time
         Context.Logger.LogInformation($"Action started: {DateTime.UtcNow}");
-        
+
         // Initialize sessionId as an empty string
         string sessionId = "";
         // Define the API version to be used in the request
         string version = "v24.1";
-        
+
         // Check if the current operation is one of the specified types
         if ((new[] { "VqlQuery", "ListItemsAtPath", "DownloadItemContent" }).Contains(Context.OperationId))
         {
@@ -24,11 +24,11 @@ public class Script : ScriptBase
                 Path = Uri.UnescapeDataString(Context.Request.RequestUri.AbsolutePath)
                     .Replace("//", "/") // Ensure no double slashes in the path
                     .Replace("/api/", $"/api/{version}/") // Insert the API version
-            }.Uri;  
-            
+            }.Uri;
+
             // Attempt to retrieve the session ID for the current version
             sessionId = await GetSessionId(version).ConfigureAwait(false);
-            
+
             // Check if the session ID was not successfully retrieved
             if (string.IsNullOrEmpty(sessionId))
             {
@@ -47,21 +47,21 @@ public class Script : ScriptBase
             // Handle the VqlQuery operation and return its response
             return await HandleQueryOperation(sessionId).ConfigureAwait(false);
         }
-        
+
         // Check if the operation ID is "ListItemsAtPath"
         if (Context.OperationId == "ListItemsAtPath")
         {
             // Handle the ListItemsAtPath operation and return its response
             return await HandleListItemsOperation(sessionId).ConfigureAwait(false);
         }
-        
+
         // Check if the operation ID is "DownloadItemContent"
         if (Context.OperationId == "DownloadItemContent")
         {
             // Handle the DownloadItemContent operation and return its response
             return await HandleDownloadItemContentOperation(sessionId).ConfigureAwait(false);
         }
-        
+
         // If the operation ID does not match any known operations, return a BadRequest response
         return new HttpResponseMessage
         {
@@ -76,41 +76,29 @@ public class Script : ScriptBase
         Context.Logger.LogInformation($"Getting sessionId");
         try
         {
-            // Log the request headers for debugging purposes
-            Context.Logger.LogInformation($"Headers: {JsonConvert.SerializeObject(Context.Request.Headers)}");
-            
             // Extract the host domain from the request URI
             var hostDomain = Context.Request.RequestUri.Host;
             // Log the host domain
             Context.Logger.LogInformation($"host: {hostDomain}");
-            // Initialize credentials
-            string username = "", password = "";
-            // Determine the appropriate credentials based on the host domain
-            switch (hostDomain)
-            {
-                case "sb-takeda-gra-full-migration.veevavault.com":
-                    username = "harmony.integration@sb-takeda.com";
-                    password = "Mediv@2030";
-                    break;
-                case "takeda-submissions.veevavault.com":
-                    username = "harmony.integration@takeda.com";
-                    password = "Mediv@2024";
-                    break;
-                default:
-                    // Throw an exception if the domain is not recognized
-                    throw new Exception("Invalid Veeva Vault Domain");
-            }
             // Construct the authentication request URL
             string requestUrl = $"https://{hostDomain}/api/{version}/auth";
             // Create the HTTP POST request for authentication
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, requestUrl);
             // Set the Accept header to expect JSON responses
             request.Headers.TryAddWithoutValidation("Accept", "application/json");
+            // Attempt to retrieve the username from the request headers
+            Context.Request.Headers.TryGetValues("un", out var unValue);
+            // Check if the usernme is present in the headers, then remove it
+            if (unValue.Any()) Context.Request.Headers.Remove("un");
+            // Attempt to retrieve the password from the request headers
+            Context.Request.Headers.TryGetValues("pw", out var pwValue);
+            // Check if the password is present in the headers, then remove it
+            if (pwValue.Any()) Context.Request.Headers.Remove("pw");
             // Add the username and password to the request body
             var body = new List<KeyValuePair<string, string>>
             {
-                new("username", username),
-                new("password", password)
+                new("username", unValue.FirstOrDefault()),
+                new("password", pwValue.FirstOrDefault())
             };
             // Set the request content
             request.Content = new FormUrlEncodedContent(body);
@@ -153,7 +141,7 @@ public class Script : ScriptBase
             var body = new List<KeyValuePair<string, string>> { new("q", query) };
             // Set the request content with the prepared query
             Context.Request.Content = new FormUrlEncodedContent(body);
-    
+
             // Send the request and await the response
             HttpResponseMessage response = await Context.SendAsync(Context.Request, CancellationToken);
             // Ensure the response status code indicates success
@@ -162,7 +150,7 @@ public class Script : ScriptBase
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             // Deserialize the response content to a JSON object
             var responseJson = JObject.Parse(responseString);
-    
+
             // Extract the "data" part of the response
             var data = responseJson["data"];
             // Initialize a variable to track the next page URL
@@ -211,7 +199,7 @@ public class Script : ScriptBase
             };
         }
     }
-    
+
     // Define an asynchronous method to handle the "List Items Operation"
     private async Task<HttpResponseMessage> HandleListItemsOperation(string sessionId)
     {
@@ -234,7 +222,7 @@ public class Script : ScriptBase
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             // Deserialize the response content to a JSON object
             var responseJson = JObject.Parse(responseString);
-    
+
             // Extract the "data" part of the response
             var data = responseJson["data"];
             // Initialize a variable to track the next page URL
@@ -257,7 +245,7 @@ public class Script : ScriptBase
                 responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 // Deserialize the next response content to a JSON object
                 responseJson = JObject.Parse(responseString);
-    
+
                 // Extract the "data" part of the next response
                 var newdata = responseJson["data"] ?? Enumerable.Empty<JToken>();
                 // Concatenate the current data with the next data
@@ -284,7 +272,7 @@ public class Script : ScriptBase
             };
         }
     }
-    
+
     // Define an asynchronous method to handle the "Download Item Content Operation"
     private async Task<HttpResponseMessage> HandleDownloadItemContentOperation(string sessionId)
     {
@@ -320,5 +308,4 @@ public class Script : ScriptBase
             };
         }
     }
-
 }
