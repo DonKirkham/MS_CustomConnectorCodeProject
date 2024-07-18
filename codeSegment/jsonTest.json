@@ -1,338 +1,69 @@
-[
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_activity__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_activity__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_activity__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_activity__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 759679,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_application__v_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_application__v_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_application__v_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_application__v_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 6571,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_commitment__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_commitment__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_commitment__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_commitment__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 16324,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_commitment_milestone__c_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_commitment_milestone__c_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_commitment_milestone__c_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_commitment_milestone__c_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 537,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_constraint__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_constraint__rim_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_constraint__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_constraint__rim_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 2253,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_controlled_vocabulary__rim_2024-07-16T20:22:10-04:00_deletes.csv",
-    "name": "7301_404864_controlled_vocabulary__rim_2024-07-16T20:22:10-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_controlled_vocabulary__rim_2024-07-16T20:22:10-04:00_updates.csv",
-    "name": "7301_404864_controlled_vocabulary__rim_2024-07-16T20:22:10-04:00_updates.csv",
-    "size": 1478,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_country__v_2024-07-16T20:22:10-04:00_deletes.csv",
-    "name": "7301_404864_country__v_2024-07-16T20:22:10-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_country__v_2024-07-16T20:22:10-04:00_updates.csv",
-    "name": "7301_404864_country__v_2024-07-16T20:22:10-04:00_updates.csv",
-    "size": 1447,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_country_decision_detail__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_country_decision_detail__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 195,
-    "modified_date": "2024-07-17T00:22:15Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_country_decision_detail__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_country_decision_detail__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 72104,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_drug_product__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_drug_product__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_drug_product__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_drug_product__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 3307,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_drug_substance__v_2024-07-16T20:22:09-04:00_deletes.csv",
-    "name": "7301_404864_drug_substance__v_2024-07-16T20:22:09-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_drug_substance__v_2024-07-16T20:22:09-04:00_updates.csv",
-    "name": "7301_404864_drug_substance__v_2024-07-16T20:22:09-04:00_updates.csv",
-    "size": 1350,
-    "modified_date": "2024-07-17T00:22:11Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_event__rim_2024-07-16T20:22:10-04:00_deletes.csv",
-    "name": "7301_404864_event__rim_2024-07-16T20:22:10-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_event__rim_2024-07-16T20:22:10-04:00_updates.csv",
-    "name": "7301_404864_event__rim_2024-07-16T20:22:10-04:00_updates.csv",
-    "size": 8559,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_manufacturer__v_2024-07-16T20:22:10-04:00_deletes.csv",
-    "name": "7301_404864_manufacturer__v_2024-07-16T20:22:10-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_manufacturer__v_2024-07-16T20:22:10-04:00_updates.csv",
-    "name": "7301_404864_manufacturer__v_2024-07-16T20:22:10-04:00_updates.csv",
-    "size": 919,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_organization__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_organization__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_organization__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_organization__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 1583,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_packaging__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_packaging__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_packaging__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_packaging__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 1362,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_product__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_product__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 516,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product_detail__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_product_detail__v_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product_detail__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_product_detail__v_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 2661,
-    "modified_date": "2024-07-17T00:22:12Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product_detail_active_substance__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_product_detail_active_substance__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_product_detail_active_substance__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_product_detail_active_substance__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 3222,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_region__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_region__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_region__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_region__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 221,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_registration__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "name": "7301_404864_registration__rim_2024-07-16T20:22:11-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_registration__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "name": "7301_404864_registration__rim_2024-07-16T20:22:11-04:00_updates.csv",
-    "size": 6456,
-    "modified_date": "2024-07-17T00:22:13Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_regulatory_objective__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_regulatory_objective__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 159,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_regulatory_objective__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_regulatory_objective__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 266318,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_submission__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 51,
-    "modified_date": "2024-07-17T00:22:15Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_submission__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 439513,
-    "modified_date": "2024-07-17T00:22:15Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_country__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_submission_country__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 879,
-    "modified_date": "2024-07-17T00:22:15Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_country__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_submission_country__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 110392,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_indication__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_submission_indication__rim_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 15,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_indication__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_submission_indication__rim_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 1200,
-    "modified_date": "2024-07-17T00:22:14Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_regulatory_objective__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "name": "7301_404864_submission_regulatory_objective__v_2024-07-16T20:22:12-04:00_deletes.csv",
-    "size": 123,
-    "modified_date": "2024-07-17T00:22:15Z"
-  },
-  {
-    "kind": "file",
-    "path": "/ScheduledDataExports/2024-07-16_404864/7301_404864_submission_regulatory_objective__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "name": "7301_404864_submission_regulatory_objective__v_2024-07-16T20:22:12-04:00_updates.csv",
-    "size": 108615,
-    "modified_date": "2024-07-17T00:22:15Z"
-  }
-]
+{
+  "Headers": [
+    { "Key": "Accept", "Value": ["*/*"] },
+    { "Key": "Accept-Encoding", "Value": ["gzip", "deflate", "zstd"] },
+    { "Key": "Accept-Language", "Value": ["en-US", "en; q=0.9"] },
+    { "Key": "Max-Forwards", "Value": ["9"] },
+    { "Key": "Referer", "Value": ["https://make.powerautomate.com/"] },
+    {
+      "Key": "User-Agent",
+      "Value": [
+        "Mozilla/5.0",
+        "(Windows NT 10.0; Win64; x64)",
+        "AppleWebKit/537.36",
+        "(KHTML, like Gecko)",
+        "Chrome/128.0.0.0",
+        "Safari/537.36",
+        "Edg/128.0.0.0"
+      ]
+    },
+    { "Key": "Origin", "Value": ["https://make.powerautomate.com"] },
+    {
+      "Key": "sec-ch-ua",
+      "Value": [
+        "\"Chromium\";v=\"128\",\"Not;A=Brand\";v=\"24\",\"Microsoft Edge\";v=\"128\""
+      ]
+    },
+    {
+      "Key": "x-ms-client-session-id",
+      "Value": ["8ab61fc0-4526-11ef-a2cc-31090800c650"]
+    },
+    { "Key": "sec-ch-ua-mobile", "Value": ["?0"] },
+    { "Key": "test", "Value": ["@environmentVariables('new_test')"] },
+    {
+      "Key": "x-ms-client-request-id",
+      "Value": ["e6549ef4-cf22-4061-93d0-27d632faaff7"]
+    },
+    { "Key": "sec-ch-ua-platform", "Value": ["\"Windows\""] },
+    { "Key": "sec-fetch-site", "Value": ["cross-site"] },
+    { "Key": "sec-fetch-mode", "Value": ["cors"] },
+    { "Key": "sec-fetch-dest", "Value": ["empty"] },
+    { "Key": "priority", "Value": ["u=1,i"] },
+    {
+      "Key": "X-MS-APIM-Referrer",
+      "Value": [
+        "https://europe-002.azure-apim.net/apim/veeva-20vault-5fde51885122e298a9-5f98460af6076435ac/shared-veeva-20vault-ad0be534-ce41-4098-8141-e4e2ccef1899/query"
+      ]
+    },
+    { "Key": "x-ms-gateway-object-id", "Value": [""] },
+    {
+      "Key": "x-ms-environment-id",
+      "Value": ["d9b6935e-ef01-ecc9-b1a6-112860d9f658"]
+    },
+    {
+      "Key": "X-MS-APIM-Referrer-Prefix",
+      "Value": [
+        "https://europe-002.azure-apim.net/apim/veeva-20vault-5fde51885122e298a9-5f98460af6076435ac/shared-veeva-20vault-ad0be534-ce41-4098-8141-e4e2ccef1899"
+      ]
+    },
+    {
+      "Key": "X-MS-APIM-Callback",
+      "Value": ["https://europe-002.consent.azure-apim.net"]
+    },
+    {
+      "Key": "X-ARR-LOG-ID",
+      "Value": ["aec324d9-1d5a-418b-be98-460691945f67"]
+    },
+    { "Key": "CLIENT-IP", "Value": ["10.0.32.18:64045"] }
+  ]
+}
