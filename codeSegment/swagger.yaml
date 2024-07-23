@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
-  title: Veeva Vault
-  description: Connector to Veeva Vault for queries and files.
+  title: Veeva Query
+  description: Connect to Veeva Vault to run custom queries
   version: '1.0'
 host: '@environmentVariables("new_veevavaultdomain")'
 basePath: /api
@@ -10,11 +10,14 @@ schemes:
 consumes: []
 produces: []
 paths:
-  /query:
+  /v23.1/query:
     post:
-      operationId: VqlQuery
-      summary: Veeva Vault Query
-      description: Query Veeva Vault using VQL
+      responses:
+        default:
+          description: default
+          schema: {}
+      summary: Veeva Query
+      operationId: VeevaQuery
       parameters:
         - name: body
           in: body
@@ -22,89 +25,27 @@ paths:
           schema:
             type: object
             properties:
+              username:
+                type: string
+                title: Username
+                x-ms-visibility: important
+              password:
+                type: string
+                title: Password
+                x-ms-visibility: important
+                format: password
               q:
                 type: string
                 description: Enter a VQL Query
                 title: VQL Query
             required:
+              - username
+              - password
               - q
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          default: '*/*'
-          x-ms-visibility: internal
-      responses:
-        default:
-          description: default
-          schema: {}
-  /services/file_staging/items/{item}:
-    get:
-      operationId: ListItemsAtPath
-      summary: List Items at a Path
-      description: Return a list of files and folders for the specified path.
-      parameters:
-        - name: item
-          in: path
-          type: string
-          required: true
-          description: Specifiy the path to list files
-          x-ms-summary: List Files Path
-          format: ''
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          default: '*/*'
-          x-ms-visibility: internal
-      responses:
-        default:
-          description: default
-          schema: {}
-  /services/file_staging/items/content/{item}:
-    get:
-      operationId: DownloadItemContent
-      summary: Download Item Content
-      description: Retrieve the content of a specified file from the file staging server.
-      parameters:
-        - name: item
-          in: path
-          type: string
-          required: true
-          x-ms-visibility: important
-        - name: recursive
-          in: query
-          type: string
-          required: false
-          x-ms-visibility: internal
-        - name: limit
-          in: query
-          type: string
-          required: false
-          x-ms-visibility: internal
-        - name: format_result
-          in: query
-          type: string
-          required: false
-          x-ms-visibility: internal
-        - name: Range
-          in: header
-          required: false
-          type: string
-          x-ms-visibility: internal
-        - name: Accept
-          in: header
-          required: true
-          type: string
-          default: application/json
-          x-ms-visibility: internal
-      responses:
-        default:
-          description: default
-          schema: {}
+      description: Query Veeva Vault using VQL
 definitions: {}
 parameters: {}
 responses: {}
-tags: []
 securityDefinitions: {}
+tags: []
 security: []
