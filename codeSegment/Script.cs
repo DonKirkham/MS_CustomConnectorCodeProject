@@ -27,10 +27,17 @@ public class Script : ScriptBase
             }.Uri;
 
             // Attempt to retrieve the session ID for the current version
-            sessionId = await GetSessionId(version).ConfigureAwait(false);
+            HttpResponseMessage sessionIdResponse = await GetSessionId(version).ConfigureAwait(false);
 
             // Check if the session ID was not successfully retrieved
-            if (string.IsNullOrEmpty(sessionId))
+            if (sessionIdResponse.StatusCode == HttpStatusCode.OK)
+            {
+                // Extract the session ID from the response content
+                sessionId = await sessionIdResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                // Log the successful retrieval of the session ID
+                Context.Logger.LogInformation($"Got sessionId: {sessionId}");
+            }
+            else
             {
                 // Return a BadRequest response indicating failure to get the session ID
                 return new HttpResponseMessage
@@ -70,7 +77,7 @@ public class Script : ScriptBase
         };
     }
     // Define an asynchronous method to retrieve a session ID for authentication
-    private async Task<string> GetSessionId(string version)
+    private async Task<HttpResponseMessage> GetSessionId(string version)
     {
         // Log the attempt to get a session ID
         Context.Logger.LogInformation($"Getting sessionId");
@@ -109,14 +116,28 @@ public class Script : ScriptBase
             // Read the response content as a string
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             // Parse the response to extract the session ID
-            return JObject.Parse(responseString)["sessionId"]?.ToString() ?? "";
+            //return JObject.Parse(responseString)["sessionId"]?.ToString() ?? "";
+            var responseStatus = JObject.Parse(responseString)["responseStatus"]?.ToString() ?? "";
+            Context.Logger.LogInformation($"GetSessionId responseStatus: {responseStatus}");
+            if (responseStatus == "SUCCESS" || responseStatus == "WARNING")
+                return new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new StringContent(JObject.Parse(responseString)["sessionId"]?.ToString() ?? "")
+                };
+            else
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(responseString ?? "")
+                };
         }
         catch (Exception ex) // Catch any exceptions that occur during the process
         {
             // Log the error
             Context.Logger.LogError($"ERROR: {ex.ToString()}");
-            // Return an empty string to indicate failure
-            return "";
+            return new HttpResponseMessage(HttpStatusCode.BadRequest)
+            {
+                Content = new StringContent(ex.ToString())
+            };
         }
     }
 
@@ -150,6 +171,13 @@ public class Script : ScriptBase
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             // Deserialize the response content to a JSON object
             var responseJson = JObject.Parse(responseString);
+            var responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+            Context.Logger.LogInformation($"Query responseStatus: {responseStatus}");
+            if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(responseString ?? "")
+                };
 
             // Extract the "data" part of the response
             var data = responseJson["data"];
@@ -173,6 +201,13 @@ public class Script : ScriptBase
                 responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 // Deserialize the next response content to a JSON object
                 responseJson = JObject.Parse(responseString);
+                responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+                Context.Logger.LogInformation($"Query Next responseStatus: {responseStatus}");
+                if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(responseString ?? "")
+                    };
                 // Extract the "data" part of the next response
                 var nextData = responseJson["data"] ?? Enumerable.Empty<JToken>();
                 // Concatenate the current data with the next data
@@ -182,6 +217,7 @@ public class Script : ScriptBase
             }
             // Update the "data" part of the original response JSON with the concatenated data
             responseJson["data"] = data;
+            responseJson["request-host-domain"] = Context.Request.RequestUri.Host;
             // Set the response content with the updated JSON
             response.Content = CreateJsonContent(responseJson.ToString());
             // Return the modified response
@@ -192,9 +228,8 @@ public class Script : ScriptBase
             // Log the error
             Context.Logger.LogError($"ERROR: {ex.ToString()}");
             // Return a BadRequest response with the error message
-            return new HttpResponseMessage
+            return new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
-                StatusCode = HttpStatusCode.BadRequest,
                 Content = new StringContent(ex.ToString())
             };
         }
@@ -222,6 +257,13 @@ public class Script : ScriptBase
             var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
             // Deserialize the response content to a JSON object
             var responseJson = JObject.Parse(responseString);
+            var responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+            Context.Logger.LogInformation($"List Items responseStatus: {responseStatus}");
+            if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+                return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(responseString ?? "")
+                };
 
             // Extract the "data" part of the response
             var data = responseJson["data"];
@@ -245,6 +287,13 @@ public class Script : ScriptBase
                 responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 // Deserialize the next response content to a JSON object
                 responseJson = JObject.Parse(responseString);
+                responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+                Context.Logger.LogInformation($"List Items Next responseStatus: {responseStatus}");
+                if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(responseString ?? "")
+                    };
 
                 // Extract the "data" part of the next response
                 var newdata = responseJson["data"] ?? Enumerable.Empty<JToken>();
@@ -255,6 +304,7 @@ public class Script : ScriptBase
             }
             // Update the "data" part of the original response JSON with the concatenated data
             responseJson["data"] = data;
+            responseJson["request-host-domain"] = Context.Request.RequestUri.Host;
             // Set the response content with the updated JSON
             response.Content = CreateJsonContent(responseJson.ToString());
             // Return the modified response
@@ -265,9 +315,8 @@ public class Script : ScriptBase
             // Log the error
             Context.Logger.LogError($"ERROR: {ex.ToString()}");
             // Return a BadRequest response with the error message
-            return new HttpResponseMessage
+            return new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
-                StatusCode = HttpStatusCode.BadRequest,
                 Content = new StringContent(ex.ToString())
             };
         }
@@ -293,6 +342,19 @@ public class Script : ScriptBase
             HttpResponseMessage response = await Context.SendAsync(Context.Request, CancellationToken);
             // Ensure the response status code indicates success
             response.EnsureSuccessStatusCode();
+            var responseType = response.Headers.GetValues("responseType").FirstOrDefault();
+            Context.Logger.LogInformation($"Download Item Content response type: {responseType}");
+            // var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+            // var responseJson = JObject.Parse(responseString);
+            // var responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+            // Context.Logger.LogInformation($"Get Item Content responseStatus: {responseStatus}");
+            // if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+            //     return new HttpResponseMessage(HttpStatusCode.BadRequest)
+            //     {
+            //         Content = new StringContent(responseString ?? "")
+            //     };
+
+            response.Headers.Add("sessionId", sessionId);
             // Return the response
             return response;
         }
