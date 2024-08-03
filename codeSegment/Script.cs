@@ -1,5 +1,6 @@
 #nullable disable
 using System.Net;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -40,11 +41,7 @@ public class Script : ScriptBase
             else
             {
                 // Return a BadRequest response indicating failure to get the session ID
-                return new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Content = new StringContent("ERROR: Failed to get sessionId. Check the logs for details.")
-                };
+                return sessionIdResponse;
             }
         }
 
@@ -342,17 +339,23 @@ public class Script : ScriptBase
             HttpResponseMessage response = await Context.SendAsync(Context.Request, CancellationToken);
             // Ensure the response status code indicates success
             response.EnsureSuccessStatusCode();
-            var responseType = response.Headers.GetValues("responseType").FirstOrDefault();
-            Context.Logger.LogInformation($"Download Item Content response type: {responseType}");
-            // var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-            // var responseJson = JObject.Parse(responseString);
-            // var responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
-            // Context.Logger.LogInformation($"Get Item Content responseStatus: {responseStatus}");
-            // if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
-            //     return new HttpResponseMessage(HttpStatusCode.BadRequest)
-            //     {
-            //         Content = new StringContent(responseString ?? "")
-            //     };
+            if (response.Content.Headers.TryGetValues("Content-Type", out var values))
+            {
+                var contentType = values.FirstOrDefault();
+                Context.Logger.LogInformation($"Download Item Content response type: {contentType}");
+                if (contentType.Contains("application/json"))
+                {
+                    var responseString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var responseJson = JObject.Parse(responseString);
+                    var responseStatus = responseJson["responseStatus"]?.ToString() ?? "";
+                    Context.Logger.LogInformation($"Get Item Content responseStatus: {responseStatus}");
+                    if (responseStatus != "SUCCESS" && responseStatus != "WARNING")
+                        return new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        {
+                            Content = new StringContent(responseString ?? "")
+                        };
+                }
+            }
 
             response.Headers.Add("sessionId", sessionId);
             // Return the response
