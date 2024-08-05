@@ -42,6 +42,11 @@ public class Script : ScriptBase
             {
                 // Return a BadRequest response indicating failure to get the session ID
                 return sessionIdResponse;
+                // return new HttpResponseMessage
+                // {
+                //     StatusCode = HttpStatusCode.BadRequest,
+                //     Content = new StringContent("ERROR: Failed to get sessionId. Check the logs for details.")
+                // };
             }
         }
 
@@ -357,7 +362,7 @@ public class Script : ScriptBase
                 }
             }
 
-            response.Headers.Add("sessionId", sessionId);
+            //response.Headers.Add("sessionId", sessionId);
             // Return the response
             return response;
         }
